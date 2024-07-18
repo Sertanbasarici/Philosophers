@@ -6,20 +6,26 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:21:43 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/10 18:42:47 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/18 20:29:41 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	is_eating(t_philo *philo)
+int	ft_is_eating(t_data *data)
 {
-	while (ft_time_in_msecond(philo) < philo->time_to_eat + ft_time_in_msecond(philo))
-		usleep(100);
-}
+	static	int		i;
+	unsigned long	time_holder;
 
-void	is_sleeping(t_philo *philo)
-{
-	while (ft_time_in_msecond(philo) < philo->time_to_sleep + ft_time_in_msecond(philo))
+	i = 0;
+	time_holder = ft_start_time(data, data->start_time);
+	pthread_mutex_lock(&data->philo[data->num_of_philo % 2].fork);
+	printf("%lu %d has taken a fork\n", time_holder, data->philo[data->num_of_philo % 2].index_philo + 1);
+	pthread_mutex_lock(&data->philo[data->num_of_philo % 2 + 1].fork);
+	printf("%lu %d has taken a fork\n", time_holder, data->philo[data->num_of_philo % 2].index_philo + 1);
+	while (ft_start_time(data, data->start_time) < time_holder + data->time_to_eat)
 		usleep(100);
+	pthread_mutex_unlock(&data->philo[data->num_of_philo % 2].fork);
+	pthread_mutex_unlock(&data->philo[data->num_of_philo % 2 + 1].fork);
+	return (1);
 }
