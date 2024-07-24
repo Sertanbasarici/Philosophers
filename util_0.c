@@ -24,6 +24,7 @@ void	ft_philo_starts(int argn, char **argv, t_data *data)
 		data->meal = -1;
 	data->time_to_think = data->time_to_die - data->time_to_sleep;
 	data->philo = malloc(sizeof(t_philo) * data->num_of_philo);
+	data->fork = malloc(sizeof(pthread_mutex_t) * data->num_of_philo);
 }
 
 void	ft_mutex_init(t_data *data)
@@ -33,10 +34,11 @@ void	ft_mutex_init(t_data *data)
 	i = 0;
 	while (i < data -> num_of_philo)
 	{
-		pthread_mutex_init(&data->philo[i].fork, NULL);
-		data->philo[i].index_fork = i;
+		pthread_mutex_init(data->fork, NULL);
+		data->fork_index = i;
 		i++;
 	}
+	pthread_mutex_init(&data->mutex, NULL);
 }
 
 void	ft_threads_init(t_data *data)
@@ -52,6 +54,7 @@ void	ft_threads_init(t_data *data)
 			ft_error(1, data);
 		data->philo[i].index_philo = i;
 		i++;
+		usleep(200);
 	}
 }
 
@@ -75,7 +78,8 @@ void	ft_mutex_destroy(t_data *data)
 	i = 0;
 	while (i < data -> num_of_philo)
 	{
-		pthread_mutex_destroy(&data->philo[i].fork);
+		pthread_mutex_destroy(data->fork);
 		i++;
 	}
+	pthread_mutex_destroy(&data->mutex);
 }

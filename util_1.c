@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:41 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/18 19:42:07 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/22 17:23:09 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,30 @@ t_data	*ft_philo_refill(t_data *data_ex)
 	return (data);
 }
 
+int	ft_find_index(t_philo *philo)
+{
+	static int	i;
+	int			num;
+
+	num = philo[i++].index_philo;
+	return (num);
+}
+
 void	*routine(void *data_ex)
 {
-	t_data *data;
+	t_data	*data;
+	int		index;
 
-	usleep(100);
 	data = (t_data *)data_ex;
 	data->start_time = ft_current_time_in_msecond(data);
-	while (1)
+	pthread_mutex_lock(&data->mutex);
+	index = ft_find_index(data->philo);
+	pthread_mutex_unlock(&data->mutex);
+	while(1)
 	{
-		ft_is_eating(data);
+		ft_is_eating(data, index);
+		ft_is_sleeping(data, index);
+		ft_is_thinking(data, index);
 	}
 	return NULL;
 }
