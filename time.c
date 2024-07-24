@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:07 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/22 17:31:08 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:04:01 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ unsigned long	ft_current_time_in_msecond(t_data *data)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-unsigned long	ft_start_time(t_data *data, unsigned long time)
+unsigned long	ft_get_time(t_data *data, unsigned long time)
 {
 	return (ft_current_time_in_msecond(data) - time);
 }

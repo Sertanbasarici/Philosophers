@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:41 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/22 17:23:09 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:11:52 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,23 @@ int	ft_atoi_adjusted(const char *str, t_data *philo)
 	return (result);
 }
 
-t_data	*ft_philo_refill(t_data *data_ex)
+void	ft_number_check(char **argv, t_data *data)
 {
-	t_data	*data;
+	int	i;
+	int	j;
 
-	data = malloc(sizeof(t_philo));
-	data->num_of_philo = data_ex->num_of_philo;
-	data->time_to_die = data_ex->time_to_die;
-	data->time_to_eat = data_ex->time_to_eat;
-	data->time_to_sleep = data_ex->time_to_sleep;
-	if (data_ex->meal == -1)
-		data->meal = -1;
-	else
-		data->meal = data_ex->meal;
-	data->time_to_think = data_ex->time_to_die - data_ex->time_to_sleep;
-	data->philo = malloc(sizeof(t_philo) * data->num_of_philo);
-	data = data_ex;
-	return (data);
+	i = 1;
+	j = 0;
+	while (argv[i][j])
+	{
+		while (argv[i][j])
+		{
+			if (argv[i][j] < '0' || argv[i][j] > '9')
+				ft_error(2, data);
+			j++;
+		}
+		i++;
+	}
 }
 
 int	ft_find_index(t_philo *philo)

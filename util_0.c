@@ -34,7 +34,7 @@ void	ft_mutex_init(t_data *data)
 	i = 0;
 	while (i < data -> num_of_philo)
 	{
-		pthread_mutex_init(data->fork, NULL);
+		pthread_mutex_init(&data->fork[i], NULL);
 		data->fork_index = i;
 		i++;
 	}
@@ -48,12 +48,11 @@ void	ft_threads_init(t_data *data)
 	i = 0;
 	while (i < data->num_of_philo)
 	{
-		t_data *used_philo = malloc(sizeof(t_data));
-		used_philo = ft_philo_refill(data);
-		if (pthread_create(&data->philo[i].philo_th, NULL, &routine, used_philo) != 0)
-			ft_error(1, data);
 		data->philo[i].index_philo = i;
-		i++;
+		data->philo[i].last_meal = 0;
+		data->philo[i].before_last_meal = 0;
+		if (pthread_create(&data->philo[i++].philo_th, NULL, &routine, data) != 0)
+			ft_error(1, data);
 		usleep(200);
 	}
 }

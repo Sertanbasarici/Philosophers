@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:44:40 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/18 16:29:53 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/24 18:36:00 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int	main(int argn, char **argv)
 	data = malloc(sizeof(t_data));
 	if (argn < 5 || argn > 6)
 		ft_error(0, data);
-	ft_philo_starts(argn , argv, data); 
-	ft_threads_init(data);
+	ft_number_check(argv, data);
+	ft_philo_starts(argn , argv, data);
 	ft_mutex_init(data);
+	ft_threads_init(data);
 	ft_threads_destroy(data);
 	ft_mutex_destroy(data);
 }
