@@ -1,4 +1,4 @@
-SRC = main.c time.c util_0.c util_1.c util_2.c is_dead.c
+SRC = main.c time.c util_0.c util_1.c util_2.c only_one.c checker.c
 PHILO = philo
 
 CC = gcc

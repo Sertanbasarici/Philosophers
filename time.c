@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:07 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/24 19:04:01 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/25 19:28:04 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ void	smart_sleep(t_data *data, unsigned long time_pass)
 
 	time_now = ft_current_time_in_msecond(data);
 	while (ft_current_time_in_msecond(data) <= time_now + time_pass)
+	{
 		usleep(100);
+	}
 }

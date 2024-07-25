@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:44:40 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/24 18:36:00 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/25 21:04:12 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,19 @@
 void	ft_error(int num, t_data *data)
 {
 	if (num == 0)
+	{
 		write(2, "invalid number of arguments\n", 29);
+		free(data);
+	}
 	else if (num == 1)
-		write(2, "Error has occured while creating threads\n", 42);
-	else if (num == 2)
+	{
 		write(2, "invalid entry\n",15);
-	free(data);
+		free(data);
+	}
+	else if (num == 2)
+		write(2, "Error has occured while creating threads\n", 42);
+	else if (num == 3)
+		write(2, "invalid entry\n",15);
 	exit(0);
 }
 
