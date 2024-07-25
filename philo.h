@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:45:07 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/25 20:42:55 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/26 01:35:09 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_data
 	int				time_to_die;
 	int				time_to_sleep;
 	int				time_to_eat;
-	int				time_to_think;
 	int				meal;
 	pthread_t		dead;
 	unsigned long	start_time;

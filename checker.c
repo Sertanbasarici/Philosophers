@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 20:07:23 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/25 21:11:39 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/26 02:01:01 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ void	ft_free(t_data *data)
 	i = 0;
 	while (i < data->num_of_philo)
 	{
-		//free(&data->philo[i]);
-		//free(&data->fork[i]);
+		free(&data->philo[i]);
+		free(&data->fork[i]);
 		i++;
 	}
-	system("leaks");
-	//free(data);
+	free(data);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:41 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/25 20:55:25 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/26 02:00:05 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,10 @@ void	*routine(void *data_ex)
 				break;
 		}
 		else
+		{
+			printf("gecti\n");
 			break ;
+		}
 	}
-	//ft_free(data);
- 	//system("leaks ");
 	return NULL;
 }

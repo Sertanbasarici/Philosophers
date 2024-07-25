@@ -22,12 +22,14 @@ void	ft_philo_starts(int argn, char **argv, t_data *data)
 		data->meal = ft_atoi_adjusted(argv[5], data);
 	else
 		data->meal = -1;
-	data->time_to_think = data->time_to_die - data->time_to_sleep;
 	data->philo = malloc(sizeof(t_philo) * data->num_of_philo);
 	data->fork = malloc(sizeof(pthread_mutex_t) * data->num_of_philo);
 	data->start_time = ft_current_time_in_msecond(data);
 	if (data->num_of_philo == 1)
+	{
 		ft_only_one(data);
+		exit(0);
+	}
 }
 
 void	ft_mutex_init(t_data *data)
