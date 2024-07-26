@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:07 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/25 19:28:04 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:29:37 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 unsigned long	ft_current_time_in_msecond(t_data *data)
 {
-	struct	timeval time;
-	int	control;
+	struct timeval	time;
+	int				control;
 
 	control = gettimeofday(&time, NULL);
 	if (control)
@@ -30,7 +30,7 @@ unsigned long	ft_get_time(t_data *data, unsigned long time)
 
 void	smart_sleep(t_data *data, unsigned long time_pass)
 {
-	unsigned long time_now;
+	unsigned long	time_now;
 
 	time_now = ft_current_time_in_msecond(data);
 	while (ft_current_time_in_msecond(data) <= time_now + time_pass)

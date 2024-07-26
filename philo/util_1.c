@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:41 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/26 02:00:05 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:08:44 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_atoi_adjusted(const char *str, t_data *philo)
 {
-	int	i;
+	int				i;
 	unsigned int	result;
 
 	i = 0;
@@ -36,21 +36,27 @@ int	ft_atoi_adjusted(const char *str, t_data *philo)
 	return (result);
 }
 
+void	ft_number_check_1(t_data *data, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			ft_error(1, data);
+		i++;
+	}
+}
+
 void	ft_number_check(char **argv, t_data *data)
 {
 	int	i;
-	int	j;
 
 	i = 1;
-	j = 0;
-	while (argv[i][j])
+	while (argv[i])
 	{
-		while (argv[i][j])
-		{
-			if (argv[i][j] < '0' || argv[i][j] > '9')
-				ft_error(2, data);
-			j++;
-		}
+		ft_number_check_1(data, argv[i]);
 		i++;
 	}
 }
@@ -68,6 +74,7 @@ void	*routine(void *data_ex)
 {
 	t_data	*data;
 	int		index;
+	int		is_death;
 
 	data = (t_data *)data_ex;
 	pthread_mutex_lock(&data->mutex);
@@ -75,20 +82,19 @@ void	*routine(void *data_ex)
 	pthread_mutex_unlock(&data->mutex);
 	while (1)
 	{
-		if (data->meal != data->philo[index].meal_num)
+		is_death = ft_is_dead(data, data->philo->last_meal,
+				ft_get_time(data, data->start_time), index);
+		if (data->meal != data->philo[data->num_of_philo - 1].meal_num)
 		{
-			if ((ft_is_eating(data, index) == 1 ) || (ft_is_dead(data, data->philo->last_meal, ft_get_time(data, data->start_time), index) == 1))
-				break;
-			if (ft_is_sleeping(data, index) || ft_is_dead(data, data->philo->last_meal, ft_get_time(data, data->start_time), index) == 1)
-				break;
-			if (ft_is_thinking(data, index) || ft_is_dead(data, data->philo->last_meal, ft_get_time(data, data->start_time), index) == 1)
-				break;
+			if ((ft_is_eating(data, index)) || (is_death == 1))
+				break ;
+			if ((ft_is_sleeping(data, index)) || (is_death == 1))
+				break ;
+			if ((ft_is_thinking(data, index)) || (is_death == 1))
+				break ;
 		}
 		else
-		{
-			printf("gecti\n");
 			break ;
-		}
 	}
-	return NULL;
+	return (NULL);
 }

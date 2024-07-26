@@ -6,18 +6,18 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:45:07 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/26 01:35:09 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:28:24 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
-#define PHILO_H
+# define PHILO_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <pthread.h>
-#include <sys/time.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_philo
 {
@@ -60,8 +60,10 @@ int				ft_find_index(t_philo *philo);
 void			smart_sleep(t_data *data, unsigned long time_pass);
 int				ft_is_thinking(t_data *data, int index);
 int				ft_is_sleeping(t_data *data, int index);
-int				ft_is_dead(t_data *data, int before_eating, int after_eating, int index);
+int				ft_is_dead(t_data *data, int before_eating,
+					int after_eating, int index);
 void			ft_print_actions(t_data *data, int index, char *str);
 void			*checker(void *data_ex);
+void			ft_number_check_1(t_data *data, char *str);
 
 #endif

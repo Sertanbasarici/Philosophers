@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 20:07:23 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/26 02:01:01 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:26:40 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,21 @@ void	*checker(void *data_ex)
 	{
 		while (index < data->num_of_philo)
 		{
-			if (ft_is_dead(data, data->philo[index].last_meal, ft_get_time(data, data->start_time), index) == 1)
-				ft_free(data);
+			if (ft_is_dead(data, data->philo[index].last_meal,
+					ft_get_time(data, data->start_time), index) == 1)
+				return (NULL);
 			if (data->meal == data->philo[data->num_of_philo - 1].meal_num)
-				ft_free(data);
+				return (NULL);
 			index++;
 		}
 		index = 0;
 	}
-	return NULL;
+	return (NULL);
 }
 
 void	ft_free(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (i < data->num_of_philo)
-	{
-		free(&data->philo[i]);
-		free(&data->fork[i]);
-		i++;
-	}
+	free(data->philo);
+	free(data->fork);
 	free(data);
-	exit(0);
 }

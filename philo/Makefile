@@ -1,21 +1,20 @@
-SRC = main.c time.c util_0.c util_1.c util_2.c only_one.c checker.c
 PHILO = philo
-
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-RM = rm -f
+SRC = main.c time.c util_0.c util_1.c util_2.c only_one.c checker.c
 
 OBJS = $(SRC:.c=.o)
 
-all: $(PHILO)
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+RM = rm -rf
 
+all: $(PHILO)
 $(PHILO):$(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(PHILO)
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 fclean:
-	$(RM) $(OBJS) $(PHILO)
+	@$(RM) $(OBJS) $(PHILO)
 
 re: fclean all
 

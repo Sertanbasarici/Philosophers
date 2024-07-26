@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 17:48:49 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/26 01:53:39 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:26:56 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_only_one(t_data *data)
 
 void	*routine_one(void *data_ex)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = (t_data *)data_ex;
 	ft_print_actions(data, 0, "has taken a fork");
@@ -32,5 +32,5 @@ void	*routine_one(void *data_ex)
 	free(data->philo);
 	free(data->fork);
 	free(data);
-	return NULL;
+	return (NULL);
 }

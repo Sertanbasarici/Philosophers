@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_0.c                                             :+:      :+:    :+:   */
+/*   util_0.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:47:53 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/10 11:57:01 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:05:38 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_philo_starts(int argn, char **argv, t_data *data)
 
 void	ft_mutex_init(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data -> num_of_philo)
@@ -54,12 +54,13 @@ void	ft_threads_init(t_data *data)
 	{
 		data->philo[i].index_philo = i;
 		data->philo[i].last_meal = 0;
-		if (pthread_create(&data->philo[i++].philo_th, NULL, &routine, data) != 0)
-			ft_error(1, data);
+		if (pthread_create(&data->philo[i++].philo_th,
+				NULL, &routine, data) != 0)
+			ft_error(2, data);
 		usleep(200);
 	}
 	if (pthread_create(&data->dead, NULL, &checker, data) != 0)
-		ft_error(1, data);
+		ft_error(2, data);
 }
 
 void	ft_threads_destroy(t_data *data)
@@ -70,16 +71,16 @@ void	ft_threads_destroy(t_data *data)
 	while (i < data->num_of_philo)
 	{
 		if (pthread_join(data->philo[i].philo_th, NULL) != 0)
-			ft_error(1, data);
+			ft_error(2, data);
 		i++;
 	}
 	if (pthread_join(data->dead, NULL) != 0)
-		ft_error(1, data);
+		ft_error(2, data);
 }
 
 void	ft_mutex_destroy(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data -> num_of_philo)
