@@ -6,35 +6,22 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:44:40 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/26 19:16:20 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/30 01:36:10 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_error(int num, t_data *data)
+void	ft_error(int num)
 {
 	if (num == 0)
-	{
 		write(2, "invalid number of arguments\n", 29);
-		free(data);
-	}
 	else if (num == 1)
-	{
 		write(2, "invalid entry\n", 15);
-		free(data);
-	}
 	else if (num == 2)
-	{
 		write(2, "Error has occured while creating threads\n", 42);
-		ft_free(data);
-	}
 	else if (num == 3)
-	{
 		write(2, "invalid entry\n", 15);
-		ft_free(data);
-	}
-	exit(0);
 }
 
 int	main(int argn, char **argv)
@@ -43,14 +30,36 @@ int	main(int argn, char **argv)
 
 	data = malloc(sizeof(t_data));
 	if (argn < 5 || argn > 6)
-		ft_error(0, data);
-	ft_number_check(argv, data);
-	ft_philo_starts(argn, argv, data);
+	{
+		ft_error(0);
+		free(data);
+		return (0);
+	}
+	if (ft_number_check(argv) == 1)
+	{
+		ft_error(1);
+		free(data);
+		return (0);
+	}
+	if (ft_philo_starts(argn, argv, data) == 1)
+	{
+		ft_free(data);
+		return (0);
+	}
 	ft_mutex_init(data);
-	ft_threads_init(data);
-	ft_threads_destroy(data);
+	if (ft_threads_init(data) == 1)
+		return (0);
+	if (ft_threads_destroy(data) == 1)
+		return (0);
 	ft_mutex_destroy(data);
 	ft_free(data);
+}
+
+void	ft_free(t_data *data)
+{
+	free(data->philo);
+	free(data->fork);
+	free(data);
 }
 
 /*__attribute__((destructor)) static void test()

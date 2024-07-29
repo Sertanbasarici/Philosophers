@@ -6,23 +6,23 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:41 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/26 19:08:44 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/30 00:55:13 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_atoi_adjusted(const char *str, t_data *philo)
+int	ft_atoi_adjusted(const char *str)
 {
-	int				i;
-	unsigned int	result;
+	int					i;
+	unsigned long long	result;
 
 	i = 0;
 	result = 0;
 	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '-')
-		ft_error(3, philo);
+		ft_error(3);
 	if (str[i] == '+')
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
@@ -31,34 +31,39 @@ int	ft_atoi_adjusted(const char *str, t_data *philo)
 		result += str[i] - '0';
 		i++;
 	}
+	if (result == 0)
+		ft_error(3);
 	if (result > 2147483647)
-		ft_error(3, philo);
+		ft_error(3);
 	return (result);
 }
 
-void	ft_number_check_1(t_data *data, char *str)
+int	ft_number_check_1(char *str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] < '0' || str[i] > '9')
-			ft_error(1, data);
+		if ((str[i] < '0' || str[i] > '9') && str[i] != '+')
+			return (1);
 		i++;
 	}
+	return (0);
 }
 
-void	ft_number_check(char **argv, t_data *data)
+int	ft_number_check(char **argv)
 {
 	int	i;
 
 	i = 1;
 	while (argv[i])
 	{
-		ft_number_check_1(data, argv[i]);
+		if (ft_number_check_1(argv[i]) == 1)
+			return (1);
 		i++;
 	}
+	return (0);
 }
 
 int	ft_find_index(t_philo *philo)
@@ -74,7 +79,6 @@ void	*routine(void *data_ex)
 {
 	t_data	*data;
 	int		index;
-	int		is_death;
 
 	data = (t_data *)data_ex;
 	pthread_mutex_lock(&data->mutex);
@@ -82,18 +86,19 @@ void	*routine(void *data_ex)
 	pthread_mutex_unlock(&data->mutex);
 	while (1)
 	{
-		is_death = ft_is_dead(data, data->philo->last_meal,
-				ft_get_time(data, data->start_time), index);
-		if (data->meal != data->philo[data->num_of_philo - 1].meal_num)
-		{
-			if ((ft_is_eating(data, index)) || (is_death == 1))
-				break ;
-			if ((ft_is_sleeping(data, index)) || (is_death == 1))
-				break ;
-			if ((ft_is_thinking(data, index)) || (is_death == 1))
-				break ;
-		}
-		else
+		if (ft_ate_all(data)
+			|| (ft_is_dead(data, data->philo[index].last_meal,
+					ft_get_time(data), index)) || (ft_is_eating(data, index)))
+			break ;
+		if (ft_ate_all(data)
+			|| ft_is_dead(data, data->philo[index].last_meal,
+				ft_get_time(data), index) || (ft_is_sleeping(data, index)))
+			break ;
+		if (ft_ate_all(data)
+			|| ft_is_dead(data, data->philo[index].last_meal,
+				ft_get_time(data), index) == 1)
+			break ;
+		if (ft_ate_all(data))
 			break ;
 	}
 	return (NULL);
