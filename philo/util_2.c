@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:21:43 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/30 18:33:05 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:40:27 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ int	ft_is_eating(t_data *data, int index)
 
 int	ft_is_sleeping(t_data *data, int index)
 {
-	if (ft_ate_all(data) || ft_is_dead(data, data->philo[index].last_meal, ft_get_time(data), index))
+	if (ft_ate_all(data) || ft_is_dead(data,
+			data->philo[index].last_meal, ft_get_time(data), index))
 		return (1);
 	ft_print_actions(data, index, "is sleeping");
 	smart_sleep(data, data->time_to_sleep, index);
-	if (ft_ate_all(data) || ft_is_dead(data, data->philo[index].last_meal, ft_get_time(data), index))
+	if (ft_ate_all(data) || ft_is_dead(data,
+			data->philo[index].last_meal, ft_get_time(data), index))
 		return (1);
 	return (0);
 }

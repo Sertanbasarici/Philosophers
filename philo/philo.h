@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:45:07 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/30 16:47:45 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:43:11 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ int					ft_is_dead(t_data *data, int before_eating,
 						int after_eating, int index);
 void				ft_print_actions(t_data *data, int index, char *str);
 int					ft_number_check_1(char *str);
-void				*routine_checker();
+void				*routine_checker(void *data_ex);
 
 #endif

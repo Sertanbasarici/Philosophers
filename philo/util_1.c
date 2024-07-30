@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:41 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/30 18:23:36 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:41:10 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,17 @@ void	*routine(void *data_ex)
 	{
 		if (data->meal != data->philo[index].meal_num)
 		{
-			if (ft_is_dead(data, data->philo[index].last_meal, ft_get_time(data), index) || (ft_is_eating(data, index)))
+			if (ft_is_dead(data, data->philo[index].last_meal,
+					ft_get_time(data), index) || (ft_is_eating(data, index)))
 				break ;
-			if (ft_is_dead(data, data->philo[index].last_meal, ft_get_time(data), index) || (ft_is_sleeping(data, index)))
+			if (ft_is_dead(data, data->philo[index].last_meal,
+					ft_get_time(data), index) || (ft_is_sleeping(data, index)))
 				break ;
-			if (ft_is_dead(data, data->philo[index].last_meal, ft_get_time(data), index) || (ft_is_thinking(data, index)))
+			if (ft_is_dead(data, data->philo[index].last_meal,
+					ft_get_time(data), index) || (ft_is_thinking(data, index)))
 				break ;
 		}
-		else 
+		else
 			break ;
 	}
 	return (NULL);
