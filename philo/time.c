@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:07 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/30 01:20:12 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:17:33 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int	ft_ate_all(t_data *data)
 {
 	int			i;
 	int			counter;
+	static int	checker;
 
+	if (checker == 1)
+		return (1);
 	counter = 0;
 	i = 0;
 	while (i < data->num_of_philo)
@@ -57,6 +60,9 @@ int	ft_ate_all(t_data *data)
 		i++;
 	}
 	if (counter == data->num_of_philo)
+	{
+		checker = 1;
 		return (1);
+	}
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:41 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/30 00:55:13 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:23:36 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_atoi_adjusted(const char *str)
+unsigned long long	ft_atoi_adjusted(const char *str)
 {
 	int					i;
 	unsigned long long	result;
@@ -33,8 +33,6 @@ int	ft_atoi_adjusted(const char *str)
 	}
 	if (result == 0)
 		ft_error(3);
-	if (result > 2147483647)
-		ft_error(3);
 	return (result);
 }
 
@@ -46,6 +44,8 @@ int	ft_number_check_1(char *str)
 	while (str[i])
 	{
 		if ((str[i] < '0' || str[i] > '9') && str[i] != '+')
+			return (1);
+		if (ft_atoi_adjusted(str) > 2147483647)
 			return (1);
 		i++;
 	}
@@ -86,19 +86,16 @@ void	*routine(void *data_ex)
 	pthread_mutex_unlock(&data->mutex);
 	while (1)
 	{
-		if (ft_ate_all(data)
-			|| (ft_is_dead(data, data->philo[index].last_meal,
-					ft_get_time(data), index)) || (ft_is_eating(data, index)))
-			break ;
-		if (ft_ate_all(data)
-			|| ft_is_dead(data, data->philo[index].last_meal,
-				ft_get_time(data), index) || (ft_is_sleeping(data, index)))
-			break ;
-		if (ft_ate_all(data)
-			|| ft_is_dead(data, data->philo[index].last_meal,
-				ft_get_time(data), index) == 1)
-			break ;
-		if (ft_ate_all(data))
+		if (data->meal != data->philo[index].meal_num)
+		{
+			if (ft_is_dead(data, data->philo[index].last_meal, ft_get_time(data), index) || (ft_is_eating(data, index)))
+				break ;
+			if (ft_is_dead(data, data->philo[index].last_meal, ft_get_time(data), index) || (ft_is_sleeping(data, index)))
+				break ;
+			if (ft_is_dead(data, data->philo[index].last_meal, ft_get_time(data), index) || (ft_is_thinking(data, index)))
+				break ;
+		}
+		else 
 			break ;
 	}
 	return (NULL);

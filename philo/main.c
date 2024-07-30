@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:44:40 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/30 01:36:10 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:04:46 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ int	main(int argn, char **argv)
 		return (0);
 	}
 	ft_mutex_init(data);
-	if (ft_threads_init(data) == 1)
-		return (0);
-	if (ft_threads_destroy(data) == 1)
-		return (0);
+	ft_threads_init(data);
+	ft_threads_destroy(data);
 	ft_mutex_destroy(data);
 	ft_free(data);
 }

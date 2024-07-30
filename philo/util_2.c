@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:21:43 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/30 01:19:35 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/30 18:33:05 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,11 @@ int	ft_is_eating(t_data *data, int index)
 		return (1);
 	ft_print_actions(data, index, "has taken a fork");
 	ft_print_actions(data, index, "is eating");
-	if (smart_sleep(data, data->time_to_eat, index) == 1 || ft_ate_all(data))
-	{
-		pthread_mutex_unlock(&data->fork[index]);
-		pthread_mutex_unlock(&data->fork[(index + 1) % data->num_of_philo]);
-		return (1);
-	}
-	data->philo[index].meal_num++;
+	smart_sleep(data, data->time_to_eat, index);
 	data->philo[index].last_meal = ft_get_time(data);
 	pthread_mutex_unlock(&data->fork[index]);
 	pthread_mutex_unlock(&data->fork[(index + 1) % data->num_of_philo]);
+	data->philo[index].meal_num++;
 	if (ft_ate_all(data) || ft_is_dead(data, data->philo[index]
 			.last_meal, ft_get_time(data), index))
 		return (1);
@@ -43,10 +38,11 @@ int	ft_is_eating(t_data *data, int index)
 
 int	ft_is_sleeping(t_data *data, int index)
 {
-	if (ft_ate_all(data))
+	if (ft_ate_all(data) || ft_is_dead(data, data->philo[index].last_meal, ft_get_time(data), index))
 		return (1);
 	ft_print_actions(data, index, "is sleeping");
-	if (ft_ate_all(data) || smart_sleep(data, data->time_to_sleep, index) == 1)
+	smart_sleep(data, data->time_to_sleep, index);
+	if (ft_ate_all(data) || ft_is_dead(data, data->philo[index].last_meal, ft_get_time(data), index))
 		return (1);
 	return (0);
 }
@@ -54,11 +50,15 @@ int	ft_is_sleeping(t_data *data, int index)
 int	ft_is_thinking(t_data *data, int index)
 {
 	if (ft_is_dead(data, data->philo[index].last_meal,
-			ft_get_time(data), index) == 1 || ft_ate_all(data))
+			ft_get_time(data), index) == 1)
+		return (1);
+	if (ft_ate_all(data))
 		return (1);
 	ft_print_actions(data, index, "is thinking");
 	if (ft_is_dead(data, data->philo[index].last_meal,
-			ft_get_time(data), index) == 1 || ft_ate_all(data))
+			ft_get_time(data), index) == 1)
+		return (1);
+	if (ft_ate_all(data))
 		return (1);
 	return (0);
 }

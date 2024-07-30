@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:47:53 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/30 01:36:41 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:50:29 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,11 @@ int	ft_threads_init(t_data *data)
 		data->philo[i].meal_num = 0;
 		if (pthread_create(&data->philo[i++].philo_th,
 				NULL, &routine, data) != 0)
-		{
 			ft_error(2);
-			return (1);
-		}
-		usleep(100);
+		usleep(200);
 	}
+	if (pthread_create(&data->dead, NULL, &routine_checker, data))
+		ft_error(2);
 	return (0);
 }
 
@@ -80,6 +79,11 @@ int	ft_threads_destroy(t_data *data)
 			return (1);
 		}
 		i++;
+	}
+	if (pthread_join(data->dead, NULL) != 0)
+	{
+		ft_error(2);
+		return (1);
 	}
 	return (0);
 }
