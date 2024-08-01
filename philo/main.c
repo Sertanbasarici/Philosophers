@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:44:40 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/30 16:04:46 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:44:18 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,3 @@ void	ft_free(t_data *data)
 	free(data->fork);
 	free(data);
 }
-
-/*__attribute__((destructor)) static void test()
-{
-	system("leaks philo");
-}*/

@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:41 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/30 18:41:10 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:45:51 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ unsigned long long	ft_atoi_adjusted(const char *str)
 		result += str[i] - '0';
 		i++;
 	}
-	if (result == 0)
-		ft_error(3);
 	return (result);
 }
 
@@ -60,6 +58,10 @@ int	ft_number_check(char **argv)
 	while (argv[i])
 	{
 		if (ft_number_check_1(argv[i]) == 1)
+			return (1);
+		if (ft_number_check_1(argv[1]) > 300)
+			return (1);
+		if (ft_atoi_adjusted(argv[i]) < 1)
 			return (1);
 		i++;
 	}
