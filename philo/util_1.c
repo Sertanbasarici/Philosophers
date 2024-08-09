@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:41 by sebasari          #+#    #+#             */
-/*   Updated: 2024/08/01 18:45:51 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:52:35 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_number_check(char **argv)
 	{
 		if (ft_number_check_1(argv[i]) == 1)
 			return (1);
-		if (ft_number_check_1(argv[1]) > 300)
+		if (ft_atoi_adjusted(argv[1]) > 300)
 			return (1);
 		if (ft_atoi_adjusted(argv[i]) < 1)
 			return (1);

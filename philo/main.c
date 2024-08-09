@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:44:40 by sebasari          #+#    #+#             */
-/*   Updated: 2024/08/01 18:44:18 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:45:01 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	main(int argn, char **argv)
 	{
 		ft_error(0);
 		free(data);
-		return (0);
+		return (1);
 	}
 	if (ft_number_check(argv) == 1)
 	{
 		ft_error(1);
 		free(data);
-		return (0);
+		return (2);
 	}
 	if (ft_philo_starts(argn, argv, data) == 1)
 	{

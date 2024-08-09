@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:45:07 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/30 18:43:11 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/08/06 18:05:16 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ unsigned long		ft_get_time(t_data *data);
 int					ft_is_eating(t_data *philo, int index);
 void				ft_mutex_init(t_data *philo);
 int					ft_find_index(t_philo *philo);
-int					smart_sleep(t_data *data, unsigned long time_pass,
-						int index);
+int					smart_sleep(unsigned long time_pass);
 int					ft_is_thinking(t_data *data, int index);
 int					ft_is_sleeping(t_data *data, int index);
 int					ft_is_dead(t_data *data, int before_eating,

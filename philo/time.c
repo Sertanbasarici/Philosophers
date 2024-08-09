@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:57:07 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/30 18:17:33 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/08/06 19:54:34 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,13 @@ unsigned long	ft_get_time(t_data *data)
 	return (ft_current_time_in_msecond() - data->start_time);
 }
 
-int	smart_sleep(t_data *data, unsigned long time_pass, int index)
+int	smart_sleep(unsigned long time_pass)
 {
 	unsigned long	time_now;
 
 	time_now = ft_current_time_in_msecond();
 	while (ft_current_time_in_msecond() <= time_now + time_pass)
-	{
 		usleep(100);
-		if (ft_is_dead(data, data->philo[index].last_meal,
-				ft_get_time(data), index))
-			return (1);
-	}
 	return (0);
 }
 

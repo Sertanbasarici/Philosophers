@@ -6,7 +6,7 @@
 /*   By: sebasari <sebasari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:15:08 by sebasari          #+#    #+#             */
-/*   Updated: 2024/07/30 18:43:53 by sebasari         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:41:28 by sebasari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*routine_checker(void *data_ex)
 	while (1)
 	{
 		if (ft_is_dead(data, data->philo[index].last_meal,
-				ft_get_time(data), index) || ft_ate_all(data))
+				ft_get_time(data), index))
 			break ;
 		if (ft_ate_all(data))
 			break ;
@@ -34,7 +34,9 @@ void	*routine_checker(void *data_ex)
 			if (ft_is_dead(data, data->philo[index].last_meal,
 					ft_get_time(data), index))
 				break ;
+			index++;
 		}
+		index--;
 	}
 	return (NULL);
 }
